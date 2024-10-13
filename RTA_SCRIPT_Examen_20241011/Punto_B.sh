@@ -1,5 +1,3 @@
-#!/bin/bash
-
 createExtendedPartition() {
     local partitionNum=$1  # number_partition (arg)
     local device=$2        # device_to_partition (arg)
@@ -87,19 +85,32 @@ createPartition() {
 }
 
 # Define el punto de montaje base
+hdd=$(sudo fdisk -l | grep "10 GiB" | awk '{print $2}' | awk -F ':' '{print $1}')
 mountBase="/Examenes-UTN"
 
 # Llamadas a la función para crear 10 particiones de 1GB cada una
-createPartition 1 /dev/sdd "$mountBase/profesores" 2048 2099199 p    
-createPartition 2 /dev/sdd "$mountBase/alumno_1/parcial_1" 2099200 4196351 p
-createPartition 3 /dev/sdd "$mountBase/alumno_1/parcial_2" 4196352 6293503 p
+createPartition 1 hdd "$mountBase/profesores" 2048 2099199 p    
+createPartition 2 hdd "$mountBase/alumno_1/parcial_1" 2099200 4196351 p
+createPartition 3 hdd "$mountBase/alumno_1/parcial_2" 4196352 6293503 p
 
-createExtendedPartition 4 /dev/sdd 6293504 20971519 # extended do not mount
+createExtendedPartition 4 hdd 6293504 20971519 # extended do not mount
 
-createPartition 5 /dev/sdd "$mountBase/alumno_1/parcial_3" 6295552 8392703 p
-createPartition 6 /dev/sdd "$mountBase/alumno_2/parcial_1" 8394752 10491903 p
-createPartition 7 /dev/sdd "$mountBase/alumno_2/parcial_2" 10493952 12591103 p
-createPartition 8 /dev/sdd "$mountBase/alumno_2/parcial_3" 12593152 14690303 p
-createPartition 9 /dev/sdd "$mountBase/alumno_3/parcial_1" 14692352 16789503 p
-createPartition 10 /dev/sdd "$mountBase/alumno_3/parcial_2" 16791552 18888703 p
-createPartition 11 /dev/sdd "$mountBase/alumno_3/parcial_3" 18890752 20971518 p
+createPartition 5 hdd "$mountBase/alumno_1/parcial_3" 6295552 8392703 p
+createPartition 6 hdd "$mountBase/alumno_2/parcial_1" 8394752 10491903 p
+createPartition 7 hdd "$mountBase/alumno_2/parcial_2" 10493952 12591103 p
+createPartition 8 hdd "$mountBase/alumno_2/parcial_3" 12593152 14690303 p
+createPartition 9 hdd "$mountBase/alumno_3/parcial_1" 14692352 16789503 p
+createPartition 10 hdd "$mountBase/alumno_3/parcial_2" 16791552 18888703 p
+createPartition 11 hdd "$mountBase/alumno_3/parcial_3" 18890752 20971518 p
+
+# I have no idea why it creates a "lost+found" directory
+sudo rm -r /Examenes-UTN/alumno_1/parcial_1/lost+found/
+sudo rm -r /Examenes-UTN/alumno_1/parcial_2/lost+found/
+sudo rm -r /Examenes-UTN/alumno_1/parcial_3/lost+found/
+sudo rm -r /Examenes-UTN/alumno_2/parcial_1/lost+found/
+sudo rm -r /Examenes-UTN/alumno_2/parcial_2/lost+found/
+sudo rm -r /Examenes-UTN/alumno_2/parcial_3/lost+found/
+sudo rm -r /Examenes-UTN/alumno_3/parcial_1/lost+found/
+sudo rm -r /Examenes-UTN/alumno_3/parcial_2/lost+found/
+sudo rm -r /Examenes-UTN/alumno_3/parcial_3/lost+found/
+sudo rm -r /Examenes-UTN/profesores/lost+found/
