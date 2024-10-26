@@ -1,0 +1,4 @@
+Mi IP publica es: 152.168.139.73
+Mi usuario es: vagrant
+El Hash de mi Usuario es:$6$q8DDbWzr$lBRy/1OTgd2G3A1Aai2snzgTHByTBM/5ARm9Q0R5GAI40vuzx/EICZquvlTUnvyZ7AFz70xnB9wWrGo9Je9xT/
+La URL de mi repositorio es: git@github.com:Monkey79/UTNFRA_SO_1P2C_2024_DAngelo.git
